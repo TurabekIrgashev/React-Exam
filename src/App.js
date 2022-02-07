@@ -1,29 +1,33 @@
-import './App.css';
-import React from 'react';
-import { Route, Routes} from 'react-router-dom';
-import Uzgartirish from './pages/Uzgartirish';
-import Qushish from './pages/Qushish';
-import Mebellar from './pages/Mebellar';
-import GlobalStyle from './styles/GlobalStyle';
-import 'bootstrap/dist/css/bootstrap.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import "./App.css";
+import Header from "./components/Header";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Add from "./pages/AddPage";
+import Edit from "./pages/EditPage";
+import { useState, createContext } from "react";
+import productsList from "./data";
+
+const UserContext = createContext();
+
 
 function App() {
+  const [products, setProducts] = useState(productsList);
   return (
-     <>
-      <GlobalStyle />
-      <div className="main w-100">
-        <Routes  >
-          <Route path="/" element={<Mebellar />} />
-          <Route path='/Mebellar/*' element={<Mebellar/>}/>
-          <Route path="/Qushish/*" element={<Qushish />} />
-          <Route path="/Uzgartirish/*" element={<Uzgartirish />} />
+    <UserContext.Provider value={{
+      products,
+      changeProducts: setProducts,
+    }}>
+      <section className="container">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/add" element={<Add />} />
+          <Route path="/edit" element={<Edit />} />
         </Routes>
-      </div>
-
-    </>
+      </section>
+    </UserContext.Provider>
   );
 }
 
 export default App;
+export { UserContext }
