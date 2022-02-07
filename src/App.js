@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Route, Routes} from 'react-router-dom';
+import Uzgartirish from './pages/Uzgartirish';
+import Qushish from './pages/Qushish';
+import Mebellar from './pages/Mebellar';
+import GlobalStyle from './styles/GlobalStyle';
+import 'bootstrap/dist/css/bootstrap.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <>
+      <GlobalStyle />
+      <div className="main w-100">
+        <Routes  >
+          <Route path="/" element={<Mebellar />} />
+          <Route path='/Mebellar/*' element={<Mebellar/>}/>
+          <Route path="/Qushish/*" element={<Qushish />} />
+          <Route path="/Uzgartirish/*" element={<Uzgartirish />} />
+        </Routes>
+      </div>
+
+    </>
   );
 }
 
